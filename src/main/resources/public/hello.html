@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AJAX Call with jQuery</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Make an AJAX request using jQuery
+      $.ajax({
+        url: "http://localhost:8080/hello",
+        method: "GET",
+        success: function(response) {
+          alert(response);
+        },
+        error: function(xhr, status, error) {
+          console.log("An error occurred: " + error);
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <!-- Your HTML content here -->
+</body>
+</html>
