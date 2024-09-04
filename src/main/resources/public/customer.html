@@ -67,6 +67,7 @@
                         });
                     },
                     error: function(error) {
+                        $('#customerList').empty();
                         console.error('Error fetching customers:', error);
                     }
                 });
