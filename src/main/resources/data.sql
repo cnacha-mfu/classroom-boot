@@ -1,0 +1,10 @@
+INSERT INTO Customer (id, firstname, lastname, age, email) VALUES (1001, 'John', 'Doe', 30, 'john.doe@example.com');
+INSERT INTO Customer (id, firstname, lastname, age, email) VALUES (1002, 'Jane', 'Doe', 25, 'jane.doe@example.com');
+INSERT INTO Customer (id, firstname, lastname, age, email) VALUES (1003, 'David', 'Smith', 40, 'david.smith@example.com');
+INSERT INTO Customer (id, firstname, lastname, age, email) VALUES (1004, 'Emily', 'Jones', 35, 'emily.jones@example.com');
+INSERT INTO Customer (id, firstname, lastname, age, email) VALUES (1005, 'Michael', 'Brown', 28, 'michael.brown@example.com');
+INSERT INTO Customer (id, firstname, lastname, age, email) VALUES (1006, 'Sarah', 'Davis', 32, 'sarah.davis@example.com');
+INSERT INTO Customer (id, firstname, lastname, age, email) VALUES (1007, 'Christopher', 'Wilson', 29, 'christopher.wilson@example.com');
+INSERT INTO Customer (id, firstname, lastname, age, email) VALUES (1008, 'Jessica', 'Miller', 37, 'jessica.miller@example.com');
+INSERT INTO Customer (id, firstname, lastname, age, email) VALUES (1009, 'Matthew', 'Moore', 26, 'matthew.moore@example.com');
+INSERT INTO Customer (id, firstname, lastname, age, email) VALUES (1010, 'Ashley', 'Taylor', 31, 'ashley.taylor@example.com');

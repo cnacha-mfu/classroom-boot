@@ -2,7 +2,9 @@ package th.mfu;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,42 +18,46 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CustomerController {
 
-    HashMap<Integer, Customer> db = new HashMap<Integer, Customer>();
-    private int nextId = 1;
+    @Autowired
+    CustomerRepository repo;
+
     @GetMapping("/customers")
     public ResponseEntity<Collection> getAllCustomers(){
-        if(db.isEmpty())
+        if(repo.findAll().isEmpty())
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<Collection>(db.values(), HttpStatus.OK);
+        return new ResponseEntity<Collection>(repo.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/customers/{id}")
+    public ResponseEntity<Customer> getCustomer(@PathVariable int id){
+        Optional<Customer> cust = repo.findById(id);
+        if( !cust.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<Customer>(cust.get(), HttpStatus.OK);
     }
 
     @PostMapping("/customers")
     public ResponseEntity<String> createCustomer(@RequestBody Customer cust){
-        cust.setId(nextId);
-        db.put(nextId, cust);
-        nextId++;
+        repo.save(cust);
         return new ResponseEntity<String>("Customer created!", HttpStatus.CREATED);
     }
 
     @PutMapping("/customers/{id}")
     public ResponseEntity<String> updateCustomer(@PathVariable int id, @RequestBody Customer cust){
-        db.put(id, cust);
+        if(!repo.findById(id).isPresent())
+            return new ResponseEntity<String>("Customer not found!", HttpStatus.NOT_FOUND);
+        cust.setId(id);
+        repo.save(cust);
         return new ResponseEntity<String>("Customer updated!", HttpStatus.OK);
     }
 
 
     @DeleteMapping("/customers/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable int id){
-        db.remove(id);
+        repo.deleteById(id);
         return new ResponseEntity<String>("Customer deleted!", HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/customers/{id}")
-    public ResponseEntity<Customer> getCustomer(@PathVariable int id){
-        Customer cust = db.get(id);
-        if( cust == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<Customer>(cust, HttpStatus.OK);
-    }
+    
 }
